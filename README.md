@@ -7,9 +7,9 @@
 
 This repository showcases the development of a **peer-to-peer secure communication system** as part of the DRDO Cryptography Project (2025). The focus of the project is on replicating essential components of the **SSL/TLS protocol**, including:
 
-- Encryption and decryption using AES  
-- SHA-based integrity checks  
-- Peer-to-peer communication over UDP sockets  
+- Symmetric encryption and decryption using **AES (CBC mode)**  
+- **SHA-256**-based HMAC integrity checks  
+- Secure file and message sharing over **UDP sockets**  
 
 The application is built using **Python** and is capable of secure messaging and file transfer between two or more clients across a network. Testing has been conducted using **multiple ports on the same system**.
 
@@ -22,8 +22,8 @@ The application is built using **Python** and is capable of secure messaging and
 3. [Repository Structure](#repository-structure)  
 4. [Implementation](#implementation)  
 5. [Working Principle](#working-principle)  
-   - [Encryption/Decryption](#encryptiondecryption)  
-   - [Hash-Based Integrity Check](#hash-based-integrity-check)  
+  - [AES Encryption/Decryption](#aes-encryptiondecryption)  
+  - [SHA-256-Based Integrity Check](#sha-256-based-integrity-check)  
 6. [Sample Output](#sample-output)  
 7. [Contact](#contact)
 
@@ -32,9 +32,8 @@ The application is built using **Python** and is capable of secure messaging and
 ## Features Implemented
 
 - Peer-to-peer message and file transmission over UDP  
-- Symmetric key-based encryption using XOR  
-- Custom hash function to verify message and file integrity  
- 
+- Symmetric key encryption using **AES (CBC mode)**  
+- **SHA-256** HMAC for message and file integrity verification 
 
 ---
 
@@ -50,11 +49,19 @@ DRDO_Cryptography_Project/
 
 ---
 
+
+---
+
 ## Implementation
 
 ### Prerequisites
 
-No external Python libraries are required — everything uses built-in modules only.
+Install the required library:
+
+```bash
+pip install cryptography
+
+```
 
 
 ### Execution
@@ -82,35 +89,33 @@ exit    # Exit the application
 ```
 
 ## Working Principle
+### AES Encryption/Decryption
+- The shared password is used to derive both:
+    - a 32-byte AES key
+    - a 32-byte HMAC key
+- Data is padded using PKCS7, encrypted using AES in CBC mode, and sent with a random IV.
+- The same process (in reverse) is used for decryption on the receiver side.
 
-### Encryption/Decryption
-
-- The shared password is converted into a fixed-length 32-byte key.  
-- Messages and files are encrypted using XOR-based symmetric encryption.
-- The same function is used to decrypt on the receiver side using the shared key.
-
-### Hash-Based Integrity Check
-
-- A custom hash function (not SHA) is used:
-  -The hash is a 16-byte checksum based on simple XOR and modulo operations. 
-- The hash is appended before encryption.  
-- On receiving, the receiver decrypts, separates the hash, and recomputes it to verify authenticity.
-- If the hashes do not match, the data is rejected with an integrity warning.
-
+### SHA-256-Based Integrity Check
+- A SHA-256 HMAC is computed for the encrypted content before sending.
+- The receiver recalculates the HMAC to verify authenticity.
+- If the HMAC verification fails, an integrity warning is raised and the data is rejected.
 
 ---
 
 ## Sample Output
 
 ```
-Enter your listening port (e.g., 5001): 5001
-Enter target peer's port (e.g., 5002): 5002
+Enter shared password: secret123
+Enter your port: 5001
+Enter peer's port: 5000
 [LISTENING] on port 5001...
-Enter command ('msg', 'file', 'exit'): msg
-Enter message: Hello peer!
-[SENT] Encrypted message with hash sent.
 
-[MESSAGE from ('127.0.0.1', 5002)] Hello peer!
+Type msg / file / exit: msg
+Enter message: Hello peer!
+[SENT] Encrypted message sent.
+
+[MESSAGE from ('127.0.0.1', 5000)] Hello peer!
 
 ```
 
