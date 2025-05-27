@@ -1,4 +1,4 @@
-# DRDO Cryptography Project  
+# Cryptography Project  
 # P2P Secure Communication System (Internship Project 2025)
 
 ---
