@@ -5,7 +5,7 @@
 
 ## Project Overview
 
-This project demonstrates a peer-to-peer (P2P) secure communication system developed during the **DRDO Cryptography Internship (2025)**. The system replicates several critical components of secure communication protocols like **SSL/TLS**, including:
+This project demonstrates a peer-to-peer (P2P) secure communication system developed during the **Cryptography Internship (2025)**. The system replicates several critical components of secure communication protocols like **SSL/TLS**, including:
 
 - Symmetric encryption and decryption using **AES (CBC mode)**  
 - **SHA-256** hash-based integrity verification  
