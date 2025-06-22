@@ -5,14 +5,16 @@
 
 ## Project Overview
 
-This project demonstrates a peer-to-peer (P2P) secure communication system developed during the **Cryptography Internship (2025)**. The system replicates several critical components of secure communication protocols like **SSL/TLS**, including:
+This project demonstrates a peer-to-peer (P2P) secure communication system developed during the Cryptography Internship (2025). The system replicates several critical components of secure communication protocols like SSL/TLS, including:
 
-- Symmetric encryption and decryption using **AES (CBC mode)**  
-- **SHA-256** hash-based integrity verification  
-- Secure **RSA-based key exchange mechanism**  
-- Auto-discovery of active clients over a local network using **UDP broadcast**
+- Symmetric encryption and decryption using AES (CBC mode)
+- SHA-256 hash-based integrity verification
+- Secure RSA-based key exchange mechanism
+- Auto-discovery of active clients over a local network using UDP broadcast
 
-The application is built entirely in **Python**, using standard and cryptography libraries, and facilitates secure messaging and file transfer across networked peers.
+In addition to the core cryptographic functionality, a Graphical User Interface (GUI) has been developed to make the system user-friendly. The initial GUI was built using standard Python tools and later enhanced using Streamlit to offer an intuitive and interactive experience for message and file exchange.
+
+The entire system is implemented in Python, utilizing built-in modules along with the cryptography and pycryptodome libraries. It supports secure and efficient communication between multiple peers across a local network.
 
 ---
 
