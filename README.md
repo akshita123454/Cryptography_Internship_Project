@@ -131,7 +131,7 @@ exit    # Exit the application
 Enter shared password: secret123
 Enter your port: 5001
 Enter peer's port: 5000
-[LISTENING] on port 5001...
+[LISTENING] on port 5001....
 
 Type msg / file / exit: msg
 Enter message: Hello peer!
